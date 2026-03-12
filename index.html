@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Michele De Carolis – Collab · University of Bari</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --navy:#1a2e4a;--navy-light:#2c4a6e;--accent:#2c7bb6;--accent-hover:#1a5c8f;
+      --bg:#f9f8f6;--surface:#ffffff;--border:#dde3ea;--text:#222c38;--muted:#5a6b7d;
+      --tag-bg:#eaf2fb;--tag-color:#1a5c8f;
+      --serif:'Lora',Georgia,serif;--sans:'Source Sans 3',system-ui,sans-serif;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:var(--sans);font-size:16px;line-height:1.7;color:var(--text);background:var(--bg)}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{color:var(--accent-hover);text-decoration:underline}
+    h1,h2,h3{font-family:var(--serif);font-weight:600;line-height:1.25}
+    ul{list-style:none}
+    .page-wrapper{max-width:1100px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+    .hero-section{display:grid;grid-template-columns:240px 1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:2px solid var(--border)}
+    .sidebar{display:flex;flex-direction:column;align-items:center;gap:1.2rem}
+    .avatar-wrap{width:160px;height:160px;border-radius:50%;overflow:hidden;border:4px solid var(--border);background:var(--navy-light);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+    .avatar-wrap img{width:100%;height:100%;object-fit:cover}
+    .avatar-initials{font-family:var(--serif);font-size:2.8rem;font-weight:600;color:rgba(255,255,255,.85)}
+    .contact-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.1rem;width:100%;font-size:.88rem;line-height:1.65}
+    .ct-title{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:.6rem}
+    .contact-card p{margin-bottom:.25rem;color:var(--muted)}
+    .contact-card p strong{color:var(--text)}
+    .social-links{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;width:100%}
+    .social-btn{display:inline-flex;align-items:center;gap:.35rem;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:.4rem .75rem;font-size:.82rem;font-weight:600;color:var(--navy);transition:background .2s,border-color .2s,color .2s}
+    .social-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy);text-decoration:none}
+    .social-btn svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+    .bio-panel{padding-top:.5rem}
+    .bio-panel h1{font-size:2.1rem;color:var(--navy);margin-bottom:.15rem}
+    .role-line{font-size:1.05rem;font-weight:600;color:var(--accent);margin-bottom:.1rem}
+    .affil-line{font-size:.95rem;color:var(--muted);margin-bottom:1.4rem}
+    .bio-panel p{color:var(--text);font-size:.98rem;max-width:640px}
+    .badge-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.2rem}
+    .badge{background:var(--tag-bg);color:var(--tag-color);border-radius:20px;padding:.28rem .85rem;font-size:.82rem;font-weight:600;border:1px solid #c2ddf0}
+    .main-content{display:grid;grid-template-columns:1fr 300px;gap:2.5rem;margin-top:2.5rem}
+    .primary-col>section{margin-bottom:3rem}
+    .secondary-col>section{margin-bottom:2rem}
+    section>h2{font-size:1.3rem;color:var(--navy);border-bottom:2px solid var(--accent);padding-bottom:.4rem;margin-bottom:1.3rem;display:inline-block}
+    /* ══ HIDDEN SECTIONS — to show, remove class "section-hidden" from the element ══ */
+    .section-hidden { display: none !important; }
+
+    /* TALKS */
+    .talk-list { display:flex;flex-direction:column;gap:1rem }
+    .talk-item { padding:.9rem 1rem;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:0 8px 8px 0;font-size:.93rem }
+    .talk-item .talk-title { font-weight:600;color:var(--text);margin-bottom:.15rem }
+    .talk-item .talk-event { color:var(--muted);font-size:.88rem }
+    .talk-item .talk-date { color:var(--muted);font-size:.82rem;margin-top:.2rem }
+
+    /* AWARDS */
+    .award-list { display:flex;flex-direction:column;gap:.8rem }
+    .award-item { display:flex;gap:1rem;align-items:flex-start;padding:.8rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px }
+    .award-year { font-size:.82rem;font-weight:700;color:var(--accent);min-width:2.8rem;padding-top:.1rem }
+    .award-body .award-title { font-weight:600;color:var(--text);font-size:.93rem }
+    .award-body .award-org { color:var(--muted);font-size:.87rem }
+
+    /* TEACHING */
+    .teaching-list { display:flex;flex-direction:column;gap:.9rem }
+    .course-item { padding:.9rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.93rem }
+    .course-item .course-name { font-weight:600;color:var(--text) }
+    .course-item .course-meta { color:var(--muted);font-size:.87rem;margin-top:.2rem }
+    .course-item .course-role { display:inline-block;background:var(--tag-bg);color:var(--tag-color);border-radius:4px;padding:.1rem .5rem;font-size:.78rem;font-weight:600;margin-top:.3rem }
+
+    /* SOFTWARE */
+    .software-list { display:flex;flex-direction:column;gap:.8rem }
+    .software-item { padding:.9rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.93rem }
+    .software-item .sw-name { font-weight:700;color:var(--text) }
+    .software-item .sw-desc { color:var(--muted);font-size:.88rem;margin-top:.15rem }
+    .software-item .sw-links { margin-top:.4rem;display:flex;gap:.5rem }
+    .sw-badge { display:inline-block;background:#f0f0f0;color:#333;border-radius:4px;padding:.1rem .55rem;font-size:.76rem;font-weight:600 }
+
+    /* STUDENTS */
+    .students-list { display:flex;flex-direction:column;gap:.7rem }
+    .student-item { padding:.75rem 1rem;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:.92rem }
+    .student-item .student-name { font-weight:600;color:var(--text) }
+    .student-item .student-meta { color:var(--muted);font-size:.87rem;margin-top:.15rem }
+
+    /* SIDEBAR CV BUTTON */
+    .cv-btn { display:flex;align-items:center;justify-content:center;gap:.4rem;width:100%;padding:.55rem 1rem;background:var(--navy);color:#fff;border-radius:8px;font-weight:700;font-size:.88rem;transition:background .2s }
+    .cv-btn:hover { background:var(--navy-light);color:#fff;text-decoration:none }
+    .cv-btn svg { width:14px;height:14px;fill:currentColor }
+
+    .pub-year{font-family:var(--serif);font-size:1.55rem;font-weight:600;color:var(--navy);margin-bottom:1.2rem;padding-bottom:.3rem;border-bottom:1px solid var(--border)}
+    .pub-type{font-family:var(--sans);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;margin:1.1rem 0 .6rem}
+    .pub-type.journal{color:#1a7a4a}
+    .pub-type.conference{color:#7b3fa0}
+    .pub-type.workshop{color:#b85c00}
+    .pub-type.preprint{color:#8a0000}
+    .pub-list{display:flex;flex-direction:column;gap:.75rem}
+    .pub-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.9rem 1.1rem .85rem;transition:box-shadow .2s,border-color .2s}
+    .pub-item:hover{box-shadow:0 2px 12px rgba(44,123,182,.1);border-color:#b0ccde}
+    .venue-badge{display:inline-block;font-size:.7rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;border-radius:5px;padding:.15rem .52rem;margin-bottom:.45rem;color:#fff}
+    .vb-green  {background:#1a7a4a}
+    .vb-teal   {background:#0e7490}
+    .vb-blue   {background:#1d5fa8}
+    .vb-purple {background:#6d28d9}
+    .vb-indigo {background:#3730a3}
+    .vb-orange {background:#b45309}
+    .vb-red    {background:#9b1c1c}
+    .vb-gray   {background:#4b5563}
+    .pub-title{font-family:var(--serif);font-size:.97rem;font-weight:600;color:var(--navy);margin-bottom:.28rem;line-height:1.35}
+    .pub-title a{color:var(--navy)}
+    .pub-title a:hover{color:var(--accent)}
+    .pub-authors{font-size:.87rem;color:var(--muted);margin-bottom:.18rem}
+    .pub-authors strong{color:var(--text);font-weight:700}
+    .pub-venue{font-size:.84rem;color:var(--muted);font-style:italic}
+    .pub-abstract{font-size:.85rem;color:var(--text);margin-top:.55rem;line-height:1.6;display:none}
+    .pub-abstract.open{display:block}
+    .pub-links{margin-top:.55rem;display:flex;gap:.45rem;flex-wrap:wrap;align-items:center}
+    .pub-link{font-size:.75rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;padding:.16rem .58rem;border-radius:4px;border:1px solid var(--accent);color:var(--accent);transition:background .18s,color .18s}
+    .pub-link:hover{background:var(--accent);color:#fff;text-decoration:none}
+    .pub-doi{font-size:.8rem;color:var(--muted);margin-top:.3rem}
+    .pub-doi a{color:var(--muted);text-decoration:underline;text-underline-offset:2px;font-family:monospace;font-size:.78rem}
+    .pub-doi a:hover{color:var(--accent)}
+    .toggle-abstract{background:none;border:none;cursor:pointer;font-size:.78rem;font-weight:700;color:var(--muted);letter-spacing:.03em;padding:0;display:flex;align-items:center;gap:.25rem;transition:color .2s}
+    .toggle-abstract:hover{color:var(--accent)}
+    .toggle-abstract::before{content:'▶';font-size:.6rem;transition:transform .2s}
+    .toggle-abstract.open::before{transform:rotate(90deg)}
+    /* EDUCATION */
+    .edu-list{display:flex;flex-direction:column;gap:1rem}
+    .edu-item{display:flex;gap:1rem;align-items:flex-start}
+    .edu-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);margin-top:.45rem;flex-shrink:0}
+    .edu-degree{font-weight:700;font-size:.95rem;color:var(--text)}
+    .edu-school{font-size:.9rem;color:var(--muted)}
+    .edu-year{font-size:.82rem;font-weight:600;color:var(--accent)}
+    .edu-note{font-size:.85rem;color:var(--muted);font-style:italic}
+    /* SERVICE */
+    .service-block{margin-bottom:1.3rem}
+    .service-block h3{font-family:var(--sans);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.5rem}
+    .service-block ul li{font-size:.9rem;color:var(--text);padding:.22rem 0;border-bottom:1px dashed var(--border)}
+    .service-block ul li:last-child{border-bottom:none}
+    /* INTERESTS */
+    .interests-list{display:flex;flex-direction:column;gap:.5rem}
+    .interests-list li{display:flex;align-items:center;gap:.6rem;font-size:.93rem;color:var(--text)}
+    .interests-list li::before{content:'';width:6px;height:6px;background:var(--accent);border-radius:50%;flex-shrink:0}
+    /* PROJECTS */
+    .project-list{display:flex;flex-direction:column;gap:.6rem}
+    .project-item{background:var(--bg);border:1px solid var(--border);border-radius:7px;padding:.65rem .9rem;font-size:.87rem}
+    .project-item strong{color:var(--navy);display:block;margin-bottom:.1rem}
+    .project-item span{color:var(--muted);font-size:.82rem}
+    /* NEWS */
+    .news-list{display:flex;flex-direction:column;gap:.9rem}
+    .news-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem}
+    .news-date{font-size:.78rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.2rem}
+    .news-item p{font-size:.88rem;color:var(--text)}
+    /* SIDEBAR CARD */
+    .sidebar-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.2rem 1rem}
+    .sidebar-card>h2{font-size:1.1rem;margin-bottom:1rem}
+    footer{background:var(--navy);color:rgba(255,255,255,.55);text-align:center;padding:1.4rem 1rem;font-size:.82rem}
+    footer a{color:rgba(255,255,255,.7)}
+    footer a:hover{color:#fff}
+    @media(max-width:900px){
+      .hero-section{grid-template-columns:1fr}
+      .sidebar{flex-direction:row;flex-wrap:wrap;align-items:flex-start}
+      .avatar-wrap{width:110px;height:110px}
+      .main-content{grid-template-columns:1fr}
+      .secondary-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+    }
+    @media(max-width:600px){.secondary-col{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ═══ HERO ═══ -->
+  <section class="hero-section" id="about">
+    <aside class="sidebar">
+      <div class="avatar-wrap">
+        <img src="https://i0.wp.com/collab.di.uniba.it/wp-content/uploads/2025/12/De-Carolis_foto2.jpeg?resize=216%2C300&ssl=1" alt="Michele De Carolis" />
+      </div>
+
+      <div class="contact-card">
+        <div class="ct-title">Contact</div>
+        <p><a href="mailto:m.decarolis11@studenti.uniba.it">m.decarolis11@studenti.uniba.it</a></p>
+        <p><strong>Office:</strong> 4th floor</p>
+        <p style="margin-top:.6rem;">
+          <a href="https://www.uniba.it/ricerca/dipartimenti/informatica" target="_blank">Dipartimento di Informatica</a><br>
+          <a href="https://www.uniba.it" target="_blank">Università degli Studi di Bari "Aldo Moro"</a><br>
+          Via E. Orabona, 4 · 70125 Bari, Italy
+        </p>
+      </div>
+
+      <div class="social-links">
+        <a class="social-btn" href="https://scholar.google.com/citations?user=ObLb2yEAAAAJ&hl=it" target="_blank" title="Google Scholar">
+          <svg viewBox="0 0 24 24"><path d="M5.242 13.769 0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>
+          Scholar
+        </a>
+        <a class="social-btn" href="https://orcid.org/0009-0006-9530-1800" target="_blank" title="ORCID">
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947-.946-.431-.946-.947.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.297 0 3.891-1.303 3.891-3.722 0-2.278-1.484-3.722-3.891-3.722H11.853z"/></svg>
+          ORCID
+        </a>
+        <a class="social-btn" href="https://it.linkedin.com/in/michele-de-carolis-32687b1a9" target="_blank" title="LinkedIn">
+          <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a class="social-btn" href="https://github.com/micheleDeca" target="_blank" title="GitHub Collab">
+          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+      </div>
+    </aside>
+
+    
+
+
+     <div class="bio-panel">
+      <h1>Michele De Carolis</h1>
+      <p class="role-line">MSc Student in Computer Science (AI) · Research Assistant</p>
+      <p class="affil-line"> 
+      </p>
+      <p>
+        Michele De Carolis is a Master's student in <strong>Computer Science</strong>
+        (Artificial Intelligence curriculum) at the
+        <a href="https://www.uniba.it/ricerca/dipartimenti/informatica" target="_blank">Dipartimento di Informatica</a>,
+        University of Bari "Aldo Moro", and a Research Assistant at the
+        <a href="https://collab.di.uniba.it" target="_blank">Collaborative Development Group (Collab)</a>.
+        His research interests span
+        <strong>Artificial Intelligence</strong>, <strong>Machine Learning</strong>,
+        <strong>Deep Learning</strong>, and <strong>Robotics</strong>.
+        He applies machine learning techniques to challenging real-world problems,
+        including anomaly detection, data-driven classification, and AI-enabled systems engineering.
+      </p>
+      <div class="badge-row">
+        <span class="badge">Artificial Intelligence</span>
+        <span class="badge">Machine Learning</span>
+        <span class="badge">Deep Learning</span>
+        <span class="badge">Robotics</span>
+        <span class="badge">Anomaly Detection</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="main-content">
+    <div class="primary-col">
+
+      <!-- ═══ PUBLICATIONS ═══
+           HOW TO ADD A PAPER:
+           1. Find (or create) the <div class="pub-year-block"> for the year.
+           2. Add a <div class="pub-type journal|conference|workshop"> header.
+           3. Inside <ul class="pub-list">, copy a <li class="pub-item">.
+           4. Pick a badge: vb-green (journal), vb-teal (journal alt),
+              vb-blue (major conf), vb-purple (conf), vb-orange (workshop),
+              vb-red (preprint).
+      -->
+      <section id="publications">
+        <h2>Publications</h2>
+        <p style="font-size:.88rem;color:var(--muted);margin-bottom:1.6rem;">
+          Also listed on
+          <a href="https://scholar.google.com/citations?user=ObLb2yEAAAAJ&hl=it" target="_blank">Google Scholar</a> ·
+          <a href="https://orcid.org/0009-0006-9530-1800" target="_blank">ORCID</a> <!--·
+          <a href="#" target="_blank">DBLP</a> -->
+        </p>
+
+        <!-- ══════════ 2026 ══════════ -->
+        <div class="pub-year-block">
+          <div class="pub-year">2026</div>
+
+          <div class="pub-type journal">Journal Articles</div>
+          <ul class="pub-list">
+
+            <li class="pub-item">
+              <span class="venue-badge vb-green">ESWA</span>
+              <div class="pub-title">
+                <a href="https://doi.org/10.1016/j.eswa.2026.131232" target="_blank">
+                  Machine learning for the prioritization of Dyson sphere candidates
+                </a>
+              </div>
+              <div class="pub-authors">
+                P. Mignone, <strong>M. De Carolis</strong>
+              </div>
+              <div class="pub-venue">
+                Expert Systems with Applications, 131232, 2026.
+              </div>
+              <div class="pub-doi">DOI: <a href="https://doi.org/10.1016/j.eswa.2026.131232" target="_blank">10.1016/j.eswa.2026.131232</a></div>
+              <div class="pub-links">
+                <a class="pub-link" href="https://www.sciencedirect.com/science/article/pii/S0957417426001466" target="_blank">PDF (Open Access)</a>
+                <button class="toggle-abstract" onclick="toggleAbs(this)">Abstract</button>
+              </div>
+              <div class="pub-abstract">
+                Dyson spheres are hypothetical megastructures proposed to partially or fully enclose a star and reprocess its radiation, producing mid-infrared excesses that may appear as rare anomalies in large stellar catalogues. No confirmed Dyson sphere is known, but the systematic prioritization of stars with unexplained photometric behaviour offers a practical way to support targeted astrophysical follow-up. In this work, we present a machine learning framework for the prioritization of potential Dyson sphere candidates, combining a two-phase design with normal and anomalous star models. Isolation Forest delivers the most accurate and stable overall ranking. The pipeline recovers known excess stars and highlights new candidates for follow-up.
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- ══════════ 2025 ══════════ -->
+       <!--  <div class="pub-year-block" >
+          <div class="pub-year">2025</div>
+
+          <div class="pub-type conference">Conference &amp; Workshop Papers</div>
+          <ul class="pub-list">
+
+            <li class="pub-item"  >
+              <span class="venue-badge vb-blue">ECAI</span>
+              <div class="pub-title">
+                <a href="#">Anomaly-Based Ranking of Stellar Candidates Using Ensemble Methods FINTO</a>
+              </div>
+              <div class="pub-authors">
+                <strong>M. De Carolis</strong>, P. Mignone
+              </div>
+              <div class="pub-venue">
+                Proc. of 28th European Conference on Artificial Intelligence (ECAI 2025), Bologna, Italy, 2025
+              </div>
+              <div class="pub-links">
+                <a class="pub-link" href="#">DOI</a>
+                <a class="pub-link" href="#">PDF</a>
+                <button class="toggle-abstract" onclick="toggleAbs(this)">Abstract</button>
+              </div>
+              <div class="pub-abstract">A preliminary study on the use of ensemble anomaly detection methods for the automated ranking of stellar objects exhibiting photometric anomalies. We evaluate Isolation Forest, Local Outlier Factor, and One-Class SVM on Gaia DR3 data, assessing their suitability as first-pass filters for targeted astrophysical observations.</div>
+            </li>
+
+          </ul>
+        </div> -->
+      </section>
+
+      <!-- ═══ EDUCATION ═══ -->
+      <section id="education">
+        <h2>Education</h2>
+        <div class="edu-list">
+
+          <div class="edu-item">
+            <div class="edu-dot"></div>
+            <div>
+              <div class="edu-degree">Master's Degree in Computer Science</div>
+              <div class="edu-school">Università degli Studi di Bari "Aldo Moro", Italy</div>
+              <div class="edu-year">2025 - 2027</div>
+              <!-- <div class="edu-note">110/110 cum laude</div> -->
+            </div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-dot"></div>
+            <div>
+              <div class="edu-degree">Bachelor's Degree in Informatica e Tecnologie per la produzione del Software</div>
+              <div class="edu-school">Università degli Studi di Bari "Aldo Moro", Italy</div>
+              <div class="edu-note">110/110 cum laude</div>
+              <div class="edu-year">2022 - 2025</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ SERVICE ═══ -->
+      <section id="service"  class="section-hidden">
+        <h2>Professional Service</h2>
+        <div class="service-block">
+          <h3>Reviewer</h3>
+          <ul>
+            <li>★ add journals / conferences where you reviewed</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ═══ TALKS & INVITED LECTURES ═══
+           HOW TO SHOW: remove class "section-hidden" from the <section> tag below
+           HOW TO ADD: copy a .talk-item block and fill in title, event, date
+      -->
+      <section id="talks" class="section-hidden">
+        <h2>Talks &amp; Invited Lectures</h2>
+        <div class="talk-list">
+
+          <div class="talk-item">
+            <div class="talk-title">★ Talk title here</div>
+            <div class="talk-event">★ Conference / Workshop / Seminar name</div>
+            <div class="talk-date">📍 City, Country · Month Year</div>
+          </div>
+
+          <div class="talk-item">
+            <div class="talk-title">★ Talk title here</div>
+            <div class="talk-event">★ Conference / Workshop / Seminar name</div>
+            <div class="talk-date">📍 City, Country · Month Year</div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ AWARDS & HONORS ═══
+           HOW TO SHOW: remove class "section-hidden" from the <section> tag below
+           HOW TO ADD: copy an .award-item block, fill in year, title, organization
+      -->
+      <section id="awards" class="section-hidden">
+        <h2>Awards &amp; Honors</h2>
+        <div class="award-list">
+
+          <div class="award-item">
+            <div class="award-year">20XX</div>
+            <div class="award-body">
+              <div class="award-title">★ Award / scholarship / prize name</div>
+              <div class="award-org">★ Awarding organization</div>
+            </div>
+          </div>
+
+          <div class="award-item">
+            <div class="award-year">20XX</div>
+            <div class="award-body">
+              <div class="award-title">★ Award / scholarship / prize name</div>
+              <div class="award-org">★ Awarding organization</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ TEACHING ═══
+           HOW TO SHOW: remove class "section-hidden" from the <section> tag below
+           HOW TO ADD: copy a .course-item block and fill in name, year, role
+      -->
+      <section id="teaching" class="section-hidden">
+        <h2>Teaching</h2>
+        <div class="teaching-list">
+
+          <div class="course-item">
+            <div class="course-name">★ Course name</div>
+            <div class="course-meta">★ Degree programme · University of Bari · A.Y. 20XX/20XX</div>
+            <span class="course-role">Teaching Assistant</span>
+          </div>
+
+          <div class="course-item">
+            <div class="course-name">★ Course name</div>
+            <div class="course-meta">★ Degree programme · University of Bari · A.Y. 20XX/20XX</div>
+            <span class="course-role">Tutor</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ SOFTWARE & TOOLS ═══
+           HOW TO SHOW: remove class "section-hidden" from the <section> tag below
+           HOW TO ADD: copy a .software-item and fill in name, description, links
+      -->
+      <section id="software" class="section-hidden">
+        <h2>Software &amp; Tools</h2>
+        <div class="software-list">
+
+          <div class="software-item">
+            <div class="sw-name">★ Tool / repo name</div>
+            <div class="sw-desc">★ Short description of what it does.</div>
+            <div class="sw-links">
+              <span class="sw-badge">Python</span>
+              <a class="pub-link" href="#" target="_blank">GitHub</a>
+              <a class="pub-link" href="#" target="_blank">PyPI</a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ═══ SUPERVISED STUDENTS ═══
+           HOW TO SHOW: remove class "section-hidden" from the <section> tag below
+           HOW TO ADD: copy a .student-item and fill in name, thesis title, year
+      -->
+      <section id="students"  class="section-hidden">
+        <h2>Supervised Students</h2>
+        <div class="students-list">
+
+          <div class="student-item">
+            <div class="student-name">Flavio Palasciano</div>
+            <div class="student-meta">Interfaccia audio per l’interazione umano-robot — Bachelor's · University of Bari · 2025/2026</div>
+          </div>
+
+          <div class="student-item">
+            <div class="student-name">Francesco Granatiero</div>
+            <div class="student-meta">Strategie di DevOps su sistemi robotici — Bachelor's · University of Bari · 2025/2026</div>
+          </div>
+
+        </div>
+      </section>
+
+    </div><!-- /primary-col -->
+
+    <div class="secondary-col">
+
+      <!-- ═══ CV DOWNLOAD — HOW TO SHOW: remove class "section-hidden" ═══ -->
+      <section class="sidebar-card" id="cv-download">
+        <h2>Curriculum Vitae</h2>
+        <a class="cv-btn" href="https://webreport.ict.uniba.it/easyweb/apregistry_service.aspx?idreg=250243&idcv=1&dep=amministrazione" target="_blank" download>
+          <svg viewBox="0 0 24 24"><path d="M19 9h-4V3H9v6H5l7 7 7-7zm-8 2V5h2v6h1.17L12 13.17 9.83 11H11zm-6 7h14v2H5z"/></svg>
+          Download CV (PDF)
+        </a>
+      </section>
+
+      <section class="sidebar-card">
+        <h2>Research Interests</h2>
+        <ul class="interests-list">
+          <li>Artificial Intelligence</li>
+          <li>Machine Learning</li>
+          <li>Deep Learning</li>
+          <li>Robotics</li>
+          <li>Anomaly Detection</li>
+          <li>AI-enabled Systems</li>
+        </ul>
+      </section>
+
+      <section class="sidebar-card section-hidden">
+        <h2>Research Projects</h2>
+        <div class="project-list">
+          <div class="project-item">
+            <strong>QualAI</strong>
+            <span>Continuous Quality Improvement of AI-based Systems · PRIN 2022</span>
+          </div>
+          <div class="project-item">
+            <strong><a href="https://fondazione-fair.it/spoke/spoke-6-symbiotic-ai/" target="_blank">FAIR – Spoke 6</a></strong>
+            <span>Future Artificial Intelligence Research, Symbiotic AI · PNRR</span>
+          </div>
+          <div class="project-item">
+            <strong><a href="https://www.fondazionedare.it/" target="_blank">DARE – Spoke 1</a></strong>
+            <span>Digital Lifelong Prevention, Enabling Technologies · PNC</span>
+          </div>
+          <div class="project-item">
+            <strong><a href="https://serics.eu/" target="_blank">SERICS – Spoke 9</a></strong>
+            <span>Secure Remote Healthcare for a Better Future · PNRR</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="sidebar-card" id="news">
+        <h2>News</h2>
+        <div class="news-list">
+          <div class="news-item">
+            <div class="news-date">2025</div>
+            <p>Research Assistant at <a href="https://collab.di.uniba.it" target="_blank">Collab Lab</a>, University of Bari "Aldo Moro".</p>
+          </div>
+          <!-- add more news items here -->
+        </div>
+      </section>
+
+      <section class="sidebar-card">
+        <h2>Research Group</h2>
+        <p style="font-size:.9rem;color:var(--muted);margin-bottom:.5rem;">
+          <strong>Collaborative Development Group (Collab)</strong><br>
+          Data Science for Collaborative Software Engineering.<br>
+          Dept. of Computer Science · University of Bari "Aldo Moro"
+        </p>
+        <p style="font-size:.85rem;color:var(--muted);margin-bottom:.8rem;">
+          Faculty: <a href="https://collab.di.uniba.it/lanubile/" target="_blank">F. Lanubile</a>,
+          <a href="https://collab.di.uniba.it/fabio/" target="_blank">F. Calefato</a>,
+          <a href="https://collab.di.uniba.it/nicole/" target="_blank">N. Novielli</a>
+        </p>
+        <a class="social-btn" href="https://collab.di.uniba.it" target="_blank" style="justify-content:center;width:100%;display:flex;">
+          Visit Collab Lab ↗
+        </a>
+      </section>
+
+    </div><!-- /secondary-col -->
+  </div>
+</div>
+
+<footer>
+  <p>
+    Michele De Carolis ·
+    <a href="https://collab.di.uniba.it" target="_blank">Collaborative Development Group – Collab</a> ·
+    <a href="https://www.uniba.it" target="_blank">Università degli Studi di Bari "Aldo Moro"</a>
+  </p>
+  <p style="margin-top:.3rem;">
+    <a href="mailto:m.decarolis11@studenti.uniba.it">m.decarolis11@studenti.uniba.it</a>
+    · Via E. Orabona 4, 70125 Bari, Italia
+  </p>
+</footer>
+
+<script>
+  function toggleAbs(btn) {
+    const abs = btn.closest('.pub-item').querySelector('.pub-abstract');
+    const open = abs.classList.toggle('open');
+    btn.classList.toggle('open', open);
+  }
+</script>
+</body>
+</html>
