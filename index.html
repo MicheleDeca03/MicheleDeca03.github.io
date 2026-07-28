@@ -114,6 +114,7 @@
     .pub-authors strong{color:var(--text);font-weight:700}
     .pub-venue{font-size:.84rem;color:var(--muted);font-style:italic}
     .pub-status{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#b45309;background:#fff4e6;border:1px solid #f0d2a8;border-radius:4px;padding:.1rem .5rem;margin-top:.4rem}
+    .pub-status.preprint{color:#8a0000;background:#fdf1f1;border-color:#eec4c4}
     .pub-abstract{font-size:.85rem;color:var(--text);margin-top:.55rem;line-height:1.6;display:none}
     .pub-abstract.open{display:block}
     .pub-links{margin-top:.55rem;display:flex;gap:.45rem;flex-wrap:wrap;align-items:center}
@@ -322,7 +323,9 @@
             <li class="pub-item">
               <span class="venue-badge vb-gray">IJCAI-ECAI · SPAI</span>
               <div class="pub-title">
-                Clinical Pathways as Safety Specifications for Physical AI in Hospital Wards
+                <a href="https://arxiv.org/abs/2607.19827" target="_blank">
+                  Clinical Pathways as Safety Specifications for Physical AI in Hospital Wards
+                </a>
               </div>
               <div class="pub-authors">
                 G. Franchini, G. Mallardi, <strong>M. De Carolis</strong>, F. Lanubile
@@ -330,19 +333,51 @@
               <div class="pub-venue">
                 SPAI Workshop on Safe Physical AI, IJCAI-ECAI 2026, Bremen, Germany.
               </div>
-              <span class="pub-status">Under review</span>
+              <div class="pub-doi">arXiv: <a href="https://arxiv.org/abs/2607.19827" target="_blank">arXiv:2607.19827</a></div>
+              <div class="pub-links">
+                <a class="pub-link" href="https://arxiv.org/abs/2607.19827" target="_blank">arXiv</a>
+                <button class="toggle-abstract" onclick="toggleAbs(this)">Abstract</button>
+              </div>
+              <span class="pub-status preprint">Preprint</span>
+              <div class="pub-abstract">
+                Ensuring safety in Physical AI systems operating in real-world environments is a critical challenge, particularly in hospital wards where vulnerable patients, clinical staff, medical devices, and assistive robots coexist. In this paper, we reinterpret Clinical Pathways as explicit runtime safety specifications for embodied medical AI. We propose a conceptual robotic architecture that integrates wearable sensors, smart medical devices, and assistive robotic components into a unified framework for real-time safety monitoring. At its core, a Runtime Safety Monitor (RSM) evaluates multimodal physiological and system-level signals against clinically defined constraints derived from the prescribed care process. Rather than relying solely on statistical anomaly detection, the proposed approach combines temporal prediction, uncertainty-aware reasoning, and constraint-based verification to identify safety violations. The RSM targets three classes of events: physiological deviations from prescribed care, hardware and communication failures, and potential data tampering or misuse. This work contributes to Safe Physical AI by operationalizing domain-specific clinical knowledge as enforceable safety constraints, bridging learning-based perception and runtime safety monitoring to assist nursing staff in real-world hospital wards.
+              </div>
             </li>
 
             <li class="pub-item">
-              <span class="venue-badge vb-gray">Ital-IA</span>
+              <span class="venue-badge vb-purple">Ital-IA</span>
               <div class="pub-title">
-                From Contactless Perception to Early Warning: AI-Driven Risk Assessment on Mobile Robots
+                <a href="https://doi.org/10.13140/RG.2.2.17305.38243" target="_blank">
+                  From Contactless Perception to Early Warning: AI-Driven Risk Assessment on Mobile Robots
+                </a>
               </div>
               <div class="pub-authors">
                 G. Franchini, G. Mallardi, <strong>M. De Carolis</strong>, F. Lanubile
               </div>
               <div class="pub-venue">
                 Ital-IA 2026 – 6th National Conference on Artificial Intelligence, Rome, Italy.
+              </div>
+              <div class="pub-doi">DOI: <a href="https://doi.org/10.13140/RG.2.2.17305.38243" target="_blank">10.13140/RG.2.2.17305.38243</a></div>
+              <div class="pub-links">
+                <a class="pub-link" href="https://www.researchgate.net/publication/408171460_From_Contactless_Perception_to_Early_Warning_AI-Driven_Risk_Assessment_on_Mobile_Robots" target="_blank">PDF</a>
+                <button class="toggle-abstract" onclick="toggleAbs(this)">Abstract</button>
+              </div>
+              <div class="pub-abstract">
+                Mobile robots operating in clinical and assistive environments require the ability to monitor human physiological states without direct contact. While remote photoplethysmography (rPPG) enables the estimation of vital signs from video, existing approaches focus on signal extraction and rarely address downstream clinical decision-making. In this work, we present an AI-driven multimodal pipeline that bridges contactless physiological perception and early warning risk assessment on a mobile robotic platform. The system is deployed on a TIAGo Pro robot equipped with an Intel RealSense D435 sensor, enabling synchronized RGB, near-infrared, and depth acquisition. A multimodal pipeline combines depth-stabilised region-of-interest selection, adaptive RGB-NIR fusion for cardiac estimation, and a depth-based respiratory channel, aiming to provide robust estimates of heart rate, respiratory rate, and oxygen saturation. Building on these measurements, we introduce an interpretable early warning risk assessment module inspired by clinical scoring systems, designed to operate under uncertain sensing conditions. The system is designed as a ROS 2 perception node and will be evaluated through a staged validation plan. This work advances risk-aware embodied perception for contactless monitoring, enabling mobile robots to support continuous and non-invasive patient assessment in real-world scenarios.
+              </div>
+            </li>
+
+            <!-- ★ TODO: aggiungere la sede (workshop / conferenza) quando è definita -->
+            <li class="pub-item">
+              <span class="venue-badge vb-gray">Under review</span>
+              <div class="pub-title">
+                Statistical Multivariate Node-Level Anomaly Localization for Robot Runtime Monitoring
+              </div>
+              <div class="pub-authors">
+                M. E. Griseta, <strong>M. De Carolis</strong>, G. Mallardi, F. Lanubile
+              </div>
+              <div class="pub-venue">
+                ★ Venue / Conference, 2026.
               </div>
               <span class="pub-status">Under review</span>
             </li>
