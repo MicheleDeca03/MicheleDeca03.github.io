@@ -135,11 +135,15 @@
     .edu-school{font-size:.9rem;color:var(--muted)}
     .edu-year{font-size:.82rem;font-weight:600;color:var(--accent)}
     .edu-note{font-size:.85rem;color:var(--muted);font-style:italic}
-    /* SERVICE */
-    .service-block{margin-bottom:1.3rem}
-    .service-block h3{font-family:var(--sans);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.5rem}
-    .service-block ul li{font-size:.9rem;color:var(--text);padding:.22rem 0;border-bottom:1px dashed var(--border)}
-    .service-block ul li:last-child{border-bottom:none}
+    /* ACADEMIC SERVICE */
+    .service-subhead{font-family:var(--sans);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:1.4rem 0 .6rem}
+    .service-subhead:first-of-type{margin-top:0}
+    .service-list{display:flex;flex-direction:column;gap:.5rem}
+    .service-list li{display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:.6rem .95rem}
+    .service-venue{font-weight:600;font-size:.93rem;color:var(--text)}
+    .service-pub{font-size:.85rem;color:var(--muted)}
+    .service-year{margin-left:auto;font-family:monospace;font-size:.8rem;color:var(--muted)}
+    .service-note{font-size:.85rem;color:var(--muted);margin-top:1rem}
     /* INTERESTS */
     .interests-list{display:flex;flex-direction:column;gap:.5rem}
     .interests-list li{display:flex;align-items:center;gap:.6rem;font-size:.93rem;color:var(--text)}
@@ -443,49 +447,41 @@
         </div>
       </section>
 
-      <!-- ============ ACADEMIC SERVICE ============ -->
-<section id="service">
-  <h2>Academic Service</h2>
+      <!-- ═══ ACADEMIC SERVICE ═══
+           HOW TO ADD: copy an <li> inside the right <ul class="service-list">
+           and fill in venue / publisher / year. Never list manuscript titles
+           or authors — peer review is confidential.
+      -->
+      <section id="service">
+        <h2>Academic Service</h2>
 
-  <h3 class="service-subhead">Journal Reviewer</h3>
-  <ul class="service-list">
-    <li>
-      <span class="service-venue">Future Generation Computer Systems</span>
-      <span class="service-pub">Elsevier</span>
-      <span class="service-year">2026</span>
-    </li>
-    <li>
-      <span class="service-venue">Discover Artificial Intelligence</span>
-      <span class="service-pub">Springer Nature</span>
-      <span class="service-year">2026</span>
-    </li>
-  </ul>
+        <h3 class="service-subhead">Journal Reviewer</h3>
+        <ul class="service-list">
+          <li>
+            <span class="service-venue">Future Generation Computer Systems</span>
+            <span class="service-pub">Elsevier</span>
+            <span class="service-year">2026</span>
+          </li>
+          <li>
+            <span class="service-venue">Discover Artificial Intelligence</span>
+            <span class="service-pub">Springer Nature</span>
+            <span class="service-year">2026</span>
+          </li>
+        </ul>
 
-  <h3 class="service-subhead">Conference &amp; Workshop Reviewer</h3>
-  <ul class="service-list">
-    <li>
-      <span class="service-venue">1st Workshop on Safe Physical AI (SPAI)</span>
-      <span class="service-pub">IJCAI/ECAI 2026, Bremen</span>
-      <span class="service-year">2026</span>
-    </li>
-  </ul>
+        <!-- ★ DA VERIFICARE: metti questa voce SOLO se hai davvero revisionato
+             per SPAI. Se lo screenshot era l'accettazione del TUO paper,
+             cancella l'intero blocco <h3> + <ul> qui sotto. -->
+        <h3 class="service-subhead">Conference &amp; Workshop Reviewer</h3>
+        <ul class="service-list">
+          <li>
+            <span class="service-venue">1st Workshop on Safe Physical AI (SPAI)</span>
+            <span class="service-pub">IJCAI-ECAI 2026, Bremen</span>
+            <span class="service-year">2026</span>
+          </li>
+        </ul>
 
-  <p class="service-note">
-    Peer review records verified on
-    <a href="https://orcid.org/0000-0000-0000-0000" target="_blank" rel="noopener">ORCID</a>
-    where available.
-  </p>
-</section>
-
-      <!-- ═══ SERVICE ═══ -->
-      <section id="service"  class="section-hidden">
-        <h2>Professional Service</h2>
-        <div class="service-block">
-          <h3>Reviewer</h3>
-          <ul>
-            <li>★ add journals / conferences where you reviewed</li>
-          </ul>
-        </div>
+  
       </section>
 
       <!-- ═══ TALKS & INVITED LECTURES ═══
